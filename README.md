@@ -1,2 +1,2 @@
 # DSA
-Questions I have practiced 
+Questions I practice 
