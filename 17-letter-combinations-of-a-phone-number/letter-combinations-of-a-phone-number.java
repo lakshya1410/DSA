@@ -1,35 +1,33 @@
-public class Solution {
+class Solution {
     public List<String> letterCombinations(String digits) {
-        if (digits == null || digits.length() == 0) {
-            return new ArrayList<>();
-        }
-        
-        Map<Character, String> mp = new HashMap<>();
-        mp.put('2', "abc");
-        mp.put('3', "def");
-        mp.put('4', "ghi");
-        mp.put('5', "jkl");
-        mp.put('6', "mno");
-        mp.put('7', "pqrs");
-        mp.put('8', "tuv");
-        mp.put('9', "wxyz");
-        
         List<String> ans = new ArrayList<>();
-        cal(digits, 0, "", mp, ans);
+        if(digits.length() == 0)
+            return ans;
+        
+        HashMap<Character, String> hm = new HashMap<>();
+        hm.put('2', "abc");
+        hm.put('3', "def");
+        hm.put('4', "ghi");
+        hm.put('5', "jkl");
+        hm.put('6', "mno");
+        hm.put('7', "pqrs");
+        hm.put('8', "tuv");
+        hm.put('9', "wxyz");
+        
+        backtrack(digits, 0, hm, new StringBuilder(), ans);
         return ans;
     }
     
-    public void cal(String digits, int idx, String str, Map<Character, String> mp, List<String> ans) {
-        if (idx == digits.length()) {
-            if (!str.isEmpty()) {
-                ans.add(str);
-            }
+    private static void backtrack(String digits, int i, HashMap<Character, String> hm, StringBuilder sb, List<String> ans){
+        if(i == digits.length()){
+            ans.add(sb.toString());
             return;
         }
-        
-        String letters = mp.get(digits.charAt(idx));
-        for (char letter : letters.toCharArray()) {
-            cal(digits, idx + 1, str + letter, mp, ans);
+        String curr =  hm.get(digits.charAt(i));
+        for(int k =0; k <curr.length(); k++){
+            sb.append(curr.charAt(k));
+            backtrack(digits, i+1, hm,  sb, ans);
+            sb.deleteCharAt(sb.length() -1);
         }
     }
 }
