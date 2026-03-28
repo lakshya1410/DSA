@@ -4,9 +4,9 @@ class Solution {
         for(int n: nums){
             q.add(n);
         }
-        while(k>1){
+        while(--k>0){
             q.poll();
-            k--;
+         
         }
         return q.poll();
 
