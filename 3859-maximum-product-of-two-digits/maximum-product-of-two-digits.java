@@ -1,17 +1,17 @@
 class Solution {
     public int maxProduct(int n) {
-       ArrayList<Integer> arr = new ArrayList<>();
-       while(n>0){
-        int r=n%10;
-        arr.add(r);
-        n=n/10;
-       }
-       int max=Integer.MIN_VALUE;
-       for(int i=0;i<arr.size();i++){
-        for(int j=i+1;j<arr.size();j++){
-            max=Math.max(max,arr.get(i)*arr.get(j));
+        int m1=-1;
+        int m2=-1;
+        while(n>0){
+            int d=n%10;
+            if(d>m1){
+                m2=m1;
+                m1=d;
+            }else if(d>m2){
+                m2 = d;
+            }
+            n=n/10;
         }
-       }
-       return max;
+        return m1*m2;
     }
 }
